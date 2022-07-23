@@ -57,7 +57,7 @@ function displayExpenses() {
 function displayBalance() {
   if(--window.LoopTrap <= 0) throw "Infinite loop.";
   balance = [earnings.reduce((a,b) => a+b, 0), expenses.reduce((a,b) => a+b, 0)];
-  if(balance < 0) {let element_balance = document.getElementById('balance');  element_balance.style.backgroundColor = red}
+  if(balance < 0) {let element_balance = document.getElementById('balance');  element_balance.style.backgroundColor = "red"}
     
   let element_balance = document.getElementById('balance');
   element_balance.innerText = balance.reduce((a,b) => a+b, 0);
