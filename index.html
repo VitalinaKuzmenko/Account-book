@@ -1,0 +1,83 @@
+<html>
+<p>Enter your earnings or expenses:</p>
+<input id="input"></input>
+<button id="submit-button">SUBMIT</button>
+
+<p>Earnings:<span id="earnings">0</span><p>
+<ul id="list-earnings"></ul>
+
+<p>Expenses:<span id="expenses">0</span><p>
+<ul id="list-expenses"></ul>
+
+<p>Balance:<span id="balance">0</span><p>
+
+<script>var earnings, input, balance, expenses, item;
+
+// Describe this function...
+function displayEarnings() {
+  if(--window.LoopTrap <= 0) throw "Infinite loop.";
+  let element_list_earnings = document.getElementById('list-earnings');
+  element_list_earnings.replaceChildren();
+  earnings.forEach((item) => {
+    let new_li = document.createElement('li');
+    new_li.innerText = item;
+
+    element_list_earnings.appendChild(new_li);
+  });
+  let element_earnings = document.getElementById('earnings');
+  element_earnings.innerText = earnings.reduce((a,b) => a+b, 0);
+}
+
+function getNumberOrString(value) {
+  // Convert a string value to a number if possible
+  let number_value = Number(value);
+  if (Number.isNaN(number_value)) {
+    return value
+  } else {
+    return number_value
+  }
+}
+
+// Describe this function...
+function displayExpenses() {
+  if(--window.LoopTrap <= 0) throw "Infinite loop.";
+  let element_list_expenses = document.getElementById('list-expenses');
+  element_list_expenses.replaceChildren();
+  expenses.forEach((item) => {
+    let new_li2 = document.createElement('li');
+    new_li2.innerText = item;
+
+    element_list_expenses.appendChild(new_li2);
+  });
+  let element_expenses = document.getElementById('expenses');
+  element_expenses.innerText = expenses.reduce((a,b) => a+b, 0);
+}
+
+// Describe this function...
+function displayBalance() {
+  if(--window.LoopTrap <= 0) throw "Infinite loop.";
+  balance = [earnings.reduce((a,b) => a+b, 0), expenses.reduce((a,b) => a+b, 0)];
+  let element_balance = document.getElementById('balance');
+  element_balance.innerText = balance.reduce((a,b) => a+b, 0);
+}
+
+
+earnings = [null];
+expenses = [null];
+earnings.shift();
+expenses.shift();
+
+
+document.getElementById('submit-button').addEventListener('click', (event) => {
+  input = getNumberOrString(document.getElementById('input').value);
+  if (input > 0) {
+    earnings.push(input);
+  } else {
+    expenses.push(input);
+  }
+  displayEarnings();
+  displayExpenses();
+  displayBalance();
+
+});</script>
+</html>
